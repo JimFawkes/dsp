@@ -1,1 +1,13 @@
-*.pyc
+__pycache__/
+*.py[cod]
+
+env/
+.env
+.env/
+.ENV/
+
+*.pid
+
+.vscode/
+.idea/
+
