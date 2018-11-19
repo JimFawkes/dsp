@@ -118,7 +118,7 @@ print "hello moon"
 ```
 
 Block code that is **python**-specific:  
-```{python}
+```python
 print("hello world!")
 print("hello moon")
 ```
@@ -132,7 +132,7 @@ $ git remote -v
 ```
 
 Block code that is **bash**-specific:  
-```console
+```bash
 $ git status
 $ git remote -v
 
