@@ -20,22 +20,40 @@ Here's a list of items with which you should be familiar:
 
 Make a cheat sheet for yourself: a list of at least **ten** commands and what they do.  (Use the 8 items above and add a couple of your own.)  
 
-> > REPLACE THIS TEXT WITH YOUR RESPONSE
+No. | Command | Description
+---- | ------- | -------
+1. | `ls` | List files in the current dir
+2. | `mkdir dirname` | Create new directory
+3. | `rm -r dirname` | Recursively remove a directory
+4. | `touch filename` | Create an empty file
+5. | `rm filename` | Remove a file
+6. | `mv filename newname` | Rename a file
+7. | `ls -a` | List all files in the current working dir
+8. | `cp file_1 path/to/file_2` | Copy file to a new path
+9. | `cat filename` | Show content of a file
+10. | `diff file_1 file_2` | Show a line by line comparison of two files
+11. | `man command` | Show the man page for a command (help page/documentation)
+12. | `grep` | A
+13. | `ps` | A
+14. | `sed` | A
+15. | `pwd` | A
+15. | `` | A
+15. | `` | A
 
 ---
 
 ### Q2.  List Files in Unix   
 
 What do the following commands do:  
-`ls`  
-`ls -a`  
-`ls -l`  
-`ls -lh`  
-`ls -lah`  
-`ls -t`  
-`ls -Glp`  
-
-> > REPLACE THIS TEXT WITH YOUR RESPONSE
+Original Command | Answer
+---- | ----
+`ls`  | List files in the current working dir
+`ls -a` | List all files in the current working dir
+`ls -l` | List files and display in the 'long format'
+`ls -lh` | List files and display in the 'long format' and also use unit suffixes (B for Bytes etc.,)
+`ls -lah`  | Same as `ls -lh` but for all files
+`ls -t` | List files but sort by time formatted
+`ls -Glp` | List files and display with coloring and back-slashes for dirs
 
 ---
 
@@ -43,7 +61,14 @@ What do the following commands do:
 
 Explore these other [ls options](http://www.techonthenet.com/unix/basic/ls.php) and pick 5 of your favorites:
 
-> > REPLACE THIS TEXT WITH YOUR RESPONSE
+No. | Command | Description
+---- | ------- | -------
+1. | `ls -Rlh`  | List files and files of subdirs in the long-format with unit suffixes
+2. | `ls -la`  | List all files in the long-format
+3. | `ls -`  | List files
+4. | `ls -`  | List files
+5. | `ls -`  | List files
+
 
 ---
 
@@ -52,6 +77,4 @@ Explore these other [ls options](http://www.techonthenet.com/unix/basic/ls.php) 
 What does `xargs` do? Give an example of how to use it.
 
 > > REPLACE THIS TEXT WITH YOUR RESPONSE
-
- 
 
