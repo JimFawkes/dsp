@@ -51,7 +51,7 @@ However, this is completely optional as Anaconda is an all-in-one package manage
 
 Did you install Python 2 or 3? Why?  
 
->> REPLACE THIS TEXT WITH YOUR RESPONSE
+>> I use 3.6+ because 2.X is only supported for another year and there are many improvements in python 3.X, such as f-strings.
 
 ### Q2. Which Python Version Installed   
 
@@ -59,8 +59,6 @@ In the Terminal:
 
 `python3 --version`
 
->> REPLACE THIS TEXT WITH YOUR RESPONSE
-
- 
+>> Python 3.7.1
 
 
