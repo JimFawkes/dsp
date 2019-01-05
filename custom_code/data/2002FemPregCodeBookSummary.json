@@ -1,0 +1,212 @@
+{
+  "caseid": {
+    "total": 13593,
+    "type": "raw",
+    "description": "Case identification number",
+    "values": {
+      "0": 13593
+    },
+    "labels": {
+      "0": null
+    },
+    "universe": "Applicable for all pregnancies"
+  },
+  "pregordr": {
+    "total": 13593,
+    "type": "computed",
+    "description": "Pregnancy order (number)",
+    "values": {
+      "1": 5033,
+      "2": 3766,
+      "3": 2334,
+      "4": 1224,
+      "5": 613,
+      "6": 308,
+      "7": 158,
+      "8": 78,
+      "9": 38,
+      "10": 17,
+      "11": 8,
+      "12": 5,
+      "13": 3,
+      "14": 3,
+      "15": 1,
+      "16": 1,
+      "17": 1,
+      "18": 1,
+      "19": 1
+    },
+    "labels": {
+      "1": "1st pregnancy",
+      "2": "2nd pregnancy",
+      "3": "3rd pregnancy",
+      "4": "4th pregnancy",
+      "5": "5th pregnancy",
+      "6": "6th pregnancy",
+      "7": "7th pregnancy",
+      "8": "8th pregnancy",
+      "9": "9th pregnancy",
+      "10": "10th pregnancy",
+      "11": "11th pregnancy",
+      "12": "12th pregnancy",
+      "13": "13th pregnancy",
+      "14": "14th pregnancy",
+      "15": "15th pregnancy",
+      "16": "16th pregnancy",
+      "17": "17th pregnancy",
+      "18": "18th pregnancy",
+      "19": "19th pregnancy"
+    },
+    "universe": "Applicable for all pregnancies"
+  },
+  "prglngth": {
+    "total": 13593,
+    "type": "recode",
+    "description": "Duration of completed pregnancy in weeks (recode)",
+    "values": {
+      "1": 3522,
+      "2": 793,
+      "3": 9278
+    },
+    "labels": {
+      "1": "13 weeks or less",
+      "2": "14-26 weeks",
+      "3": "27 weeks or longer"
+    },
+    "universe": "Applicable for all pregnancies"
+  },
+  "outcome": {
+    "total": 13593,
+    "type": "recode",
+    "description": "Pregnancy outcome (recode)",
+    "values": {
+      "1": 9148,
+      "2": 1862,
+      "3": 120,
+      "4": 1921,
+      "5": 190,
+      "6": 352
+    },
+    "labels": {
+      "1": "live birth",
+      "2": "induced abortion",
+      "3": "still birth",
+      "4": "miscariage",
+      "5": "ectopic pregnancy",
+      "6": "current pregnancy"
+    },
+    "universe": "Applicable for all pregnancies"
+  },
+  "birthord": {
+    "total": 13593,
+    "type": "recode",
+    "description": "Birth order (recode)",
+    "values": {
+      "0": 4445,
+      "1": 4413,
+      "2": 2874,
+      "3": 1234,
+      "4": 421,
+      "5": 126,
+      "6": 50,
+      "7": 20,
+      "8": 7,
+      "9": 2,
+      "10": 1
+    },
+    "labels": {
+      "0": "inapplicable",
+      "1": "1st birth",
+      "2": "2nd birth",
+      "3": "3rd birth",
+      "4": "4th birth",
+      "5": "5th birth",
+      "6": "6th birth",
+      "7": "7th birth",
+      "8": "8th birth",
+      "9": "9th birth",
+      "10": "10th birth"
+    },
+    "universe": "Applicable for all pregnancies that resulted in live birth (OUTCOME = 1)"
+  },
+  "birthwgt_lb": {
+    "total": 13593,
+    "type": "raw",
+    "description": "How much did (BABY'S NAME/this 1st baby) weigh at birth? (pounds)",
+    "values": {
+      "0": 4449,
+      "1": 1125,
+      "2": 2223,
+      "3": 3049,
+      "4": 1889,
+      "5": 799,
+      "97": 1,
+      "98": 1,
+      "99": 58
+    },
+    "labels": {
+      "0": "inapplicable",
+      "1": "under 6 pounds",
+      "2": "6 pounds",
+      "3": "7 pounds",
+      "4": "8 pounds",
+      "5": "9 pounds or more",
+      "97": "not ascertained",
+      "98": "refused",
+      "99": "don't know"
+    },
+    "universe": "Applicable if pregnancy resulted in live birth (BC-1 PREGEND1 or PREGEND2 included codes 5 or 6)"
+  },
+  "birthwgt_oz": {
+    "total": 13593,
+    "type": "raw",
+    "description": "How much did (BABY'S NAME/this 1st baby) weigh at birth? (ounces)",
+    "values": {
+      "0": 4506,
+      "1": 9039,
+      "97": 1,
+      "98": 1,
+      "99": 46
+    },
+    "labels": {
+      "0": "inapplicable",
+      "1": "0-15 ounces",
+      "97": "not ascertained",
+      "98": "refused",
+      "99": "don't know"
+    },
+    "universe": "Applicable if pregnancy resulted in live birth (BC-1 PREGEND1 or PREGEND2 included codes 5 or 6)"
+  },
+  "agepreg": {
+    "total": 13593,
+    "type": "recode",
+    "description": "Age at pregnancy outcome (recode)",
+    "values": {
+      "0": 352,
+      "1": 3182,
+      "2": 4246,
+      "3": 3178,
+      "4": 2635
+    },
+    "labels": {
+      "0": "inapplicable",
+      "1": "under 20 years",
+      "2": "20-24 years",
+      "3": "25-29 years",
+      "4": "30-44 years"
+    },
+    "universe": "Applicable if pregnancy is a completed pregnancy (OUTCOME NE 6)"
+  },
+  "finalwgt": {
+    "total": 13593,
+    "type": "weight-related",
+    "description": "Final post-stratified and adjusted weight",
+    "values": {
+      "0": 13593
+    },
+    "labels": {
+      "0": null
+    },
+    "universe": "Applicable for all pregnancies (respondent variable)"
+  }
+}

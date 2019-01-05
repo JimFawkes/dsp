@@ -64,20 +64,230 @@ $ git clone https://github.com/AllenDowney/ThinkStats2.git
 
 *Include your Python code, results and explanation (where applicable).*
 
+***Note: I re-wrote, refactored or copied all of the code that is necessary for these exercises.
+The code can be found in the directory `custom_code`.***
+
 ### Q1. [Think Stats Chapter 2 Exercise 4](statistics/2-4-cohens_d.md) (effect size of Cohen's d)  
 Cohen's D is an example of effect size.  Other examples of effect size are:  correlation between two variables, mean difference, regression coefficients and standardized test statistics such as: t, Z, F, etc. In this example, you will compute Cohen's D to quantify (or measure) the difference between two groups of data.   
 
 You will see effect size again and again in results of algorithms that are run in data science.  For instance, in the bootcamp, when you run a regression analysis, you will recognize the t-statistic as an example of effect size.
 
+---
+Results: *You can find a working jupyter notebook with the solution for this exercise [here](custom_code/chap02_ex_4.ipynb).*
+
+The question in this exercise is: Are first Babies heavier or lighter than other babies.
+
+The first step is to read clean and filter the necessary data. In this case we are only interested in the total weight `totalwgt_lb` of live births. We then split the dataframe into first borns `first` and all others `other`.
+
+```python
+df = ts2.read_fem_preg(clean=True)
+live = df[df['outcome'] == 1]
+first = live[live['birthord'] == 1]
+other = live[live['birthord'] != 1]
+```
+
+I then wrote a class to calculate a histogram and other interesting statistics. The next step is to create a histogram for the `totalwgt_lb` column both for `first` and `other`.
+
+```python
+first_totalwgt_lb_hist = Hist(first.totalwgt_lb)
+other_totalwgt_lb_hist = Hist(other.totalwgt_lb)
+```
+We can then compare the results for both histograms.
+
+```
+# first
+first_totalwgt_lb_hist.print_stats()
+
+Column Name: 	 totalwgt_lb
+Mean: 		 7.201
+Median: 	 7.312
+Variance: 	 2.018
+Std Dev.: 	 1.42
+Outliers: 	 [(0.125, 1), (0.3125, 1), (0.4375, 1), (0.625, 1), (0.9375, 1)]
+
+
+# other
+other_totalwgt_lb_hist.print_stats()
+
+Column Name: 	 totalwgt_lb
+Mean: 		 7.326
+Median: 	 7.375
+Variance: 	 1.943
+Std Dev.: 	 1.394
+Outliers: 	 [(0.5625, 1), (0.625, 1), (1.125, 1), (1.25, 1), (1.3125, 1)]
+```
+
+When comparing these two results, we can see that the mean values are very close to each other which suggests that there is no significant difference in the total birth weight of first-borns vs others.
+
+Next we calculate `Cohen's d` to further compare the two data sets.
+
+```python
+d = first_totalwgt_lb_hist.cohens_d(other_totalwgt_lb_hist)
+print(f"The absolute value of `Cohen's d` is: {abs(d)}")
+
+The absolute value of `Cohen's d` is: 0.08868218237434661
+```
+
+**Conclusion:**
+The difference in the mean value between first borns (`7.201`) and others (`7.326`) is very low (`0.125`) and therefore not significant.
+When looking at the absolute value of the 'effect size' using `Cohens's d` when comparing first borns and others, we can see, that with an absolute value of `0.089` the difference is very small and below the value of `0.2`. This result reinfoces the assumption, that there is no significant difference in the birth weight of first borns and others.
+
+
 ### Q2. [Think Stats Chapter 3 Exercise 1](statistics/3-1-actual_biased.md) (actual vs. biased)
 This problem presents a robust example of actual vs biased data.  As a data scientist, it will be important to examine not only the data that is available, but also the data that may be missing but highly relevant.  You will see how the absence of this relevant data will bias a dataset, its distribution, and ultimately, its statistical interpretation.
 
+---
+Results: *You can find a working jupyter notebook with the solution for this exercise [here](custom_code/chap03_ex_1.ipynb).*
+
+In this exercise we compare unbiased with biased data. We will compare the actual number of siblings in a family with the biased observation made by the kids within those families.
+
+The first step is again to read all the necessary data. In this case we will use the respondents data set.
+```python
+respondents = ts2.read_female_respondents_data(clean=False)
+```
+
+Next we calculate the histogram for the column numkdhh which lists the number of kids in the household.
+*Note: all cases with 5 or more kids in the household are grouped together and counted as 5 kids.*
+
+First the unbiased data along with the bar graph:
+
+```python
+# Unbiased Distribution
+children_hist = Hist(respondents.numkdhh)
+_ = children_hist.plot(dict_name=children_hist.pmf.pmf, label='Children Count')
+```
+
+## #TODO: Copy missing plots
+
+Then the biased data along with the bar graph:
+```python
+# Biased Distribution
+children_biased_hist = BiasedHist(respondents.numkdhh)
+_ = children_biased_hist.plot(dict_name=children_biased_hist.pmf.pmf, label='Children Count')
+```
+
+## #TODO: Copy missing plots
+
+Finally we compare the mean and other statistics of both distributions:
+
+```
+# Unbiased Distribution
+children_hist.print_stats()
+
+Column Name: 	 numkdhh
+Mean: 		 1.024
+Median: 	 1
+Variance: 	 1.413
+Std Dev.: 	 1.189
+Outliers: 	 [(1, 1636), (2, 1500), (3, 666), (4, 196), (5, 82)]
+
+
+# Biased Distribution
+children_biased_hist.print_stats()
+Column Name: 	 numkdhh
+Mean: 		 2.404
+Median: 	 1
+Variance: 	 1.202
+Std Dev.: 	 1.096
+Outliers: 	 [(0, 0), (1, 1636), (3, 1998), (4, 784), (5, 410)]
+```
+
+**Conclusion:**
+We can observe a significant shift in the mean when comparing these two distributions.
+
 ### Q3. [Think Stats Chapter 4 Exercise 2](statistics/4-2-random_dist.md) (random distribution)  
-This questions asks you to examine the function that produces random numbers.  Is it really random?  A good way to test that is to examine the pmf and cdf of the list of random numbers and visualize the distribution.  If you're not sure what pmf is, read more about it in Chapter 3.  
+This questions asks you to examine the function that produces random numbers.  Is it really random?  A good way to test that is to examine the pmf and cdf of the list of random numbers and visualize the distribution.  If you're not sure what pmf is, read more about it in Chapter 3.
+
+---
+Results: *You can find a working jupyter notebook with the solution for this exercise [here](custom_code/chap04_ex_2.ipynb).*
+
+In this exercise we generate 1000 random numbers using the `random` package in the python standard library. We then use the cdf to test the assumption that the random numbers generated are uniformly distributed.
+
+First we need to generate the random number:
+
+```python
+ml = [random.random() for x in range(1000)]
+```
+
+Next we instantiate the histogram for this list.
+```python
+random_hist = Hist(ml)
+```
+
+Finally we examine the different statistics and plots for this distribution.
+If the random values are uniformly distributed, we expect to see a mean of 0.5.
+
+```python
+random_hist.mean
+
+0.4865046795783088
+```
+
+Alternatively we can look at the quantiles of the distribution. Here we would expect to see the step length to be very close to the percentile.
+```python
+
+random_hist.cdf.quantile(10)
+
+((0, 0.0006756584518546882),
+ (0.1, 0.09466907914454925),
+ (0.2, 0.18832014960311283),
+ (0.3, 0.2919395618934151),
+ (0.4, 0.38940385463982574),
+ (0.5, 0.4893812370232884),
+ (0.6, 0.5721238362516025),
+ (0.7, 0.6637160028523832),
+ (0.8, 0.7757201627797841),
+ (0.9, 0.8827352274093908))
+```
+
+We can also look at the plots of the pmf and cdf functions.
+
+## #TODO: Copy missing plots
+
+**Conclusion:**
+We are looking at a small set of random numbers, but the distribution is still very close to what we expect from a uniform distribution.
+
+
 
 ### Q4. [Think Stats Chapter 5 Exercise 1](statistics/5-1-blue_men.md) (normal distribution of blue men)
 This is a classic example of hypothesis testing using the normal distribution.  The effect size used here is the Z-statistic. 
 
+
+---
+Results: *You can find a working jupyter notebook with the solution for this exercise [here](custom_code/chap05_ex_1.ipynb).*
+
+In this exercise we calculate the percentage of the US male population which is in the specific hight range required by the Blue Man Group.
+
+The goal is to use the normal distribution with the parameters µ = 178 cm and σ = 7.7 cm as a model instead of using an actual data set.
+
+The first step is to get the hight range in centimeters:
+```python
+lower_hight_limit = round(convs.us_hight2m(feet=5, inches=10) * 100, 1)
+upper_hight_limit = round(convs.us_hight2m(feet=6, inches=1) * 100, 1)
+lower_hight_limit, upper_hight_limit
+
+(177.8, 185.4)
+```
+Next we set the parameters for the normal distribution:
+```python
+mu = 178
+sigma = 7.7
+dist = scipy.stats.norm(loc=mu, scale=sigma)
+```
+
+We can then calculate the cdf for these values:
+
+```python
+low, high, diff = dist.cdf(lower_hight_limit), dist.cdf(upper_hight_limit), dist.cdf(upper_hight_limit) - dist.cdf(lower_hight_limit)
+low, high, diff
+
+(0.48963902786483265, 0.8317337108107857, 0.3420946829459531)
+```
+**Results:**
+About 34.2% of the US male population is within the range of 177.8 cm and 185.4 cm
+
+
+*Note: in [this notebook](custom_code/chap05_ex_1.ipynb) there is a comparisson to the same results taken from the BRFS data set.*
 
 
 ### Q5. Bayesian (Elvis Presley twin) 
@@ -86,14 +296,53 @@ Bayes' Theorem is an important tool in understanding what we really know, given 
 
 Elvis Presley had a twin brother who died at birth.  What is the probability that Elvis was an identical twin? Assume we observe the following probabilities in the population: fraternal twin is 1/125 and identical twin is 1/300.  
 
->> REPLACE THIS TEXT WITH YOUR RESPONSE
 
 ---
+Results: *You can find a working jupyter notebook with the solution for this exercise [here](custom_code/baysian_elvis_twins.ipynb).*
+
+The question here is, given the fact that Elvis had a twin, what is the probability, that it was an identical twin.
+
+With the Bayesian Theorem we can calculate the probability of an event if we have knowlege of the condition which is in our case the fact that Elvis had a twin.
+
+To calculate the probability we first need to define the events and probabilities:
+
+```
+Bayes Theorem:
+P(A|B) = (P(B|A) * P(A))/ P(B)
+
+In this case the Variables describe the following events:
+    A: Brother is an identical twin
+    B: Elvis has a twin
+    
+The probabilities are:
+    P(B|A)=1 -> Given the fact that the brother is an identical twin, how high is the chance that the brother is a twin.
+    P(A) = 1/300 -> Chance of a person having an identical twin.
+    P(B) = 1/125 + 1/300 -> Chance of a person being a twin.
+```
+
+If we now calculate:
+```python
+p_fraternal = 1/125
+p_identical = 1/300
+p_twin = p_fraternal + p_identical
+
+p = (1*p_identical)/p_twin
+print(f"The probability that Elvis was an identical twin, if the fact that elvis had a twin is true, is {round(p, 3) * 100}%")
+```
+We get: **The probability that Elvis was an identical twin, if the fact that elvis had a twin is true, is 29.4%**
 
 ### Q6. Bayesian &amp; Frequentist Comparison  
 How do frequentist and Bayesian statistics compare?
 
->> REPLACE THIS TEXT WITH YOUR RESPONSE
+---
+Frequentist and Bayesian probability are different interpretations of probability. They are also called the Frequentist or Bayesian School.
+
+Frequentist probability:
+
+
+Bayesian probability:
+
+
 
 ---
 
